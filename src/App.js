@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
 import WorkList from './containers/WorkList'
 
 class App extends React.Component {
@@ -21,7 +21,7 @@ class App extends React.Component {
     if(this.state.data){
       return (
         <div>
-          <WorkList data={this.state.data}/>
+          <WorkList className="Table" data={this.state.data}/>
         </div>
       )
     } else {

@@ -7,7 +7,7 @@ class WorkListItem extends React.Component {
     render () {
       return (
         <div>
-            <p>{this.props.firstName}</p>
+            <p>{this.props.date}{this.props.firstName}</p>
         </div>
       )
     }//end of render
