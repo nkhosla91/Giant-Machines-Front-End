@@ -37,7 +37,8 @@ class App extends React.Component {
     if(this.state.data){
       return (
         <div>
-          <h1 className="Header">Giant Machines Timesheet</h1>
+          <h1 className="Header">Giant Machines Work Orders</h1>
+          <NewEntry />
           <Summary data={this.filteredData()}/>
           <SearchClient updateSearchTerm={this.updateSearchTerm}/>
           <WorkList data={this.filteredData()}/>

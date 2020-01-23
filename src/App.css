@@ -49,6 +49,10 @@
     width: 20%;
   }
 
+  #work-table {
+      width: 100%
+  }
+
 #work-table td, #work-table th {
     text-align: center;
     border: 1px solid #ddd;
@@ -60,6 +64,9 @@
 #work-table tr:hover {background-color:lightblue}
 
 #work-table th {
+    /* justify-content: space-evenly;
+    display: flex; */
+    flex-direction: column;
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: center;
@@ -67,5 +74,6 @@
     color: white;
     position: sticky;
     top: 0;
+    /* width: 100%; */
 }
 
