@@ -22,4 +22,4 @@ class WorkListItem extends React.Component {
     }//end of render
 }//end of WorkListItem class
   
-  export default WorkListItem;
+export default WorkListItem;

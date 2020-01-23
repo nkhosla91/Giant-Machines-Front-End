@@ -13,20 +13,20 @@ class WorkList extends React.Component {
   }
 
   renderList = () => {
-    return this.props.data.map(data => {
+    return this.props.data.map(datum => {
       return <WorkListItem 
-        key={data.id}
-        id={data.id}
-        date={data.date}
-        client={data.client}
-        project={data.project}
-        projectCode={data.projectCode}
-        hours={data.hours}
-        hoursRounded={data.hoursRounded}
-        billable={data.billable}
-        firstName={data.firstName}
-        lastName={data.lastName}
-        billableRate={data.billableRate}
+        key={datum.id}
+        id={datum.id}
+        date={datum.date}
+        client={datum.client}
+        project={datum.project}
+        projectCode={datum.projectCode}
+        hours={datum.hours}
+        hoursRounded={datum.hoursRounded}
+        billable={datum.billable}
+        firstName={datum.firstName}
+        lastName={datum.lastName}
+        billableRate={datum.billableRate}
       />
     })
   }

@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import WorkList from './containers/WorkList'
 import SearchClient from './containers/SearchClient'
+import Summary from './containers/Summary'
 
 
 class App extends React.Component {
@@ -24,7 +25,7 @@ class App extends React.Component {
     })
   }
 
-  filteredWork = () =>{
+  filteredData = () =>{
     return this.state.data.filter(data => {
       return data.client.toLowerCase().includes(this.state.searchTerm)
     })
@@ -35,17 +36,12 @@ class App extends React.Component {
     console.log(this.state.data)
     if(this.state.data){
       return (
-
         <div>
-          <h1 className="Header">Giant Machine Timesheet</h1>
-
+          <h1 className="Header">Giant Machines Timesheet</h1>
+          <Summary data={this.filteredData()}/>
           <SearchClient updateSearchTerm={this.updateSearchTerm}/>
-
-          <div className="Table">
-            <WorkList data={this.filteredWork()}/>
-          </div>
-          
-      </div>
+          <WorkList data={this.filteredData()}/>
+        </div>
       )
     } else {
       return (
