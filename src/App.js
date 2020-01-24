@@ -30,6 +30,10 @@ class App extends React.Component {
     return this.state.data.filter(data => {
       return data.client.toLowerCase().includes(this.state.searchTerm)
     })
+  }
+
+  renderNewEntry = (newEntry) => {
+    this.setState({data: [...this.state.data, newEntry]})
 
   }
 
@@ -40,7 +44,7 @@ class App extends React.Component {
         <div>
           <h1 className="Header">Giant Machines Work Orders</h1>
           <Summary data={this.filteredData()}/>
-          <NewEntry />
+          <NewEntry renderNewEntry={this.renderNewEntry}/>
           <SearchClient updateSearchTerm={this.updateSearchTerm}/>
           <WorkList data={this.filteredData()}/>
         </div>

@@ -1,74 +1,156 @@
 import React from 'react';
 import '../App.css';
+import DateSelector from '../components/DateSelector'
 
 class NewEntry extends React.Component {
 
     state ={
         clicked: false,
         newEntry: {
+            month: null,
             day: null,
             year: null,
-            month: null
-        },
+            client: null,
+            project: null,
+            projectCode: null,
+            hours: null,
+            firstName: null,
+            lastName: null,
+            billableRate: null
+        }
     }
 
-    getYears = () =>{
-        let maxOffset = 10;
-        let thisYear = (new Date()).getFullYear();
-        let allYears = [];
-        for(let x = -10; x <= maxOffset; x++) {
-            allYears.push(thisYear - x)
-        }
-    
-        const yearList = allYears.map((year) => {return(<option key={year}>{year}</option>)});
-        return yearList
+    handleChange = (event) => {
+        event.persist()
+        this.setState(prevState => ({
+            newEntry: {
+              ...prevState.newEntry,
+              [event.target.name]: event.target.type === 'number' ? parseFloat(event.target.value) : event.target.value
+            }
+          }))
+
     }
+
 
     toggleButton = () => {
-       this.state.clicked ? this.setState({clicked: false}) : this.setState({clicked: true})
+        let newEntry = {
+            month: null,
+            day: null,
+            year: null,
+            client: null,
+            project: null,
+            projectCode: null,
+            hours: null,
+            firstName: null,
+            lastName: null
+        }
+       this.state.clicked ? this.setState({clicked: false, newEntry}) : this.setState({clicked: true})
     }
 
     handleSubmit = (event) => {
-        debugger
+        let newEntry = this.state.newEntry
+        let length = 0
+
+        Object.keys(newEntry).forEach(value => {
+            if (!newEntry[value]) {
+              length = length +1
+            }//end of if
+        })/// end of Object.keys
+
+            if(length >0) {
+                return alert('Please complete the entire form')
+            }//end of if
+        let date = newEntry['month'] + '/' + newEntry['day'] + '/' + newEntry['year'].slice(-2)
+        delete newEntry['month'] 
+        delete newEntry['day']
+        delete newEntry['year']
+        newEntry['date'] = date
+        newEntry['hoursRounded'] = parseInt(newEntry['hours'])
+        // console.log(newEntry)
+
+        return fetch("http://localhost:8000/api/v1/works", {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newEntry)
+          })
+          .then(response => response.json())
+          .then(response => newEntry["id"] = response.id)
+        //   .then(response => console.log(newEntry, "created entry"))
+          .then(this.props.renderNewEntry(newEntry))  
     }
 
     render () {
-        const months = [1,2,3,4,5,6,7,8,9,10,11,12]
-        const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+        console.log(this.state)
         if (!this.state.clicked){
             return (
-                <button className="New-entry" onClick={this.toggleButton} >Create New Entry</button>
+                <button className="Form-button" onClick={this.toggleButton}>Create New Entry</button>
             )
         } else {
             return(
-                <form className="Form" onSubmit={this.handleSubmit}>
+                <div className="Form-wrapper" >
+                    <h3 className="Form-header">New Entry Form</h3>
+                        <form className="Form-body" onSubmit={this.handleSubmit}>
 
-                        <label className="Form-key">Date:</label>
+                        <div>
+                            <DateSelector handleChange={this.handleChange}/>
+                        </div>
 
-                            <select className="Form-value" name="month" defaultValue="Moh">>
-                                <option defaultValue="th"/>
-                                {months.map((month) => {return(<option key={month}>{month}</option>)})}
-                            </select>
+                        <div>
+                            <label className="Form-key">Client:</label>
+                            <input className="Form-value" type="text" name="client" onChange={this.handleChange} />
+                        </div>
+                            
+                        <div>
+                            <label className="Form-key">Project:</label>
+                            <input className="Form-value" type="text" name="project" onChange={this.handleChange} />
+                        </div>
 
+                        <div>
+                            <label className="Form-key">Project Code:</label>
+                            <input className="Form-value" type="text" name="projectCode" onChange={this.handleChange} />
+                        </div>
 
-                            <select className="Form-value" name="day" defaultValue="Day">>
-                                <option defaultValue="Day">Day</option>
-                                {days.map((day) => {return(<option value={day}key={day}>{day}</option>)})}
-                            </select>
+                        <div>
+                            <label className="Form-key">Hours:</label>
+                            <input className="Form-value" type="number" name="hours" onChange={this.handleChange} />
+                        </div>
 
-                            <select className="Form-value" required>
-                                <option value="Year" defaultValue="Year">Year</option>
-                                {this.getYears()}
-                            </select>
+                        <div>
+                            <label className="Form-key">Billable:</label>
+                            <label className="Form-key">Yes
+                                <input className="Form-value" type="radio" value="Yes" name="billable" onChange={this.handleChange}/>
+                            </label>
+                            <label className="Form-key">No
+                                <input className="Form-value" type="radio" value="No" name="billable" onChange={this.handleChange}/>
+                            </label>
+                        </div>
 
+                        <div>
+                            <label className="Form-key">First Name:</label>
+                            <input className="Form-value" type="text" name="firstName" onChange={this.handleChange} />
+                        </div>
 
-                        {/* <input className="Form-value" type="text" name="date" id="date" value="MM/DD/YY" onChange={this.handleChange} /> */}
+                        <div>
+                            <label className="Form-key">Last Name:</label>
+                            <input className="Form-value" type="text" name="lastName" onChange={this.handleChange} />
+                        </div>
 
-                        <input type="submit" value="Make your Team!"/>
-    
+                        <div>
+                            <label className="Form-key">Billable Rate:</label>
+                            <input className="Form-value" type="number" name="billableRate" onChange={this.handleChange} />
+                        </div>
+
                 </form>
-        )
-        }//end ofif
+                        <div className="Form-button-wrapper">
+                            <button className="Form-button" onClick={this.toggleButton}>Close</button>
+                            <button className="Form-button" onClick={this.handleSubmit}>Submit</button>
+                        </div>
+            </div>
+         )
+        }//end of if
     }//end of render
 }//end of NewEntry class
   

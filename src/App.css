@@ -11,13 +11,35 @@
     margin-right: 30%;
 }
 
-.Form {
+.Form-wrapper {
+    border: 6px solid #ddd;
+    border-radius: 22.5px;
+}
+
+.Form-header {
+    font-family: "Arial";
+    text-indent: 10px;
+}
+
+.Form-body {
+    display: flex;
+    flex-flow: row wrap;
     font-family: "Arial";
     display: flex;
     flex-direction: wrap;
     justify-content: flex-start;
-    border-top: 3px solid #ddd;
-    border-bottom: 3px solid #ddd;
+}
+
+.Form-button-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.Form-button {
+    background-color: lightblue;
+    font-family: "Arial";
+    border-radius: 2px;
+    margin: 10px;
 }
 
 .Form-key {
@@ -29,21 +51,30 @@
     font-family: "Arial";
     margin: 10px;
     border: 1px solid #ddd;
+    height: 20px;
 }
+
+
 
 
 .New-entry {
-    border: 3px solid rgb(83, 98, 194);
     background-color: lightblue;
     font-family: "Arial";
+    border-radius: 2px;
+    margin: 10px;
+    font-family: "Arial";
     font-weight: bold;
-    margin-bottom: 8px;
-    margin-left: 10px;
-    margin-top: 9px;
 
 }
 
 
+.Search {
+    font-family: "Arial";
+    text-indent: 10px;
+    border-top: 3px solid #ddd;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
 .Search-bar {
     font-family: "Arial";
     text-indent: 10px;
@@ -75,13 +106,6 @@
   
 
 
-.Search {
-    font-family: "Arial";
-    text-indent: 10px;
-    border: 3px solid #ddd;
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
 
 
 #work-table {
