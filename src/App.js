@@ -10,7 +10,8 @@ class App extends React.Component {
 
   state = {
     data: null,
-    sorted: null,
+    sortBy: null,
+    sortDirection: "down",
     searchTerm: "",
     billableOnly: false
   }
@@ -21,37 +22,88 @@ class App extends React.Component {
       .then(data => this.setState({data}))
   }
 
+  renderNewEntry = (newEntry) => {
+    this.setState({data: [...this.state.data, newEntry]})
+  }
+
+  
+  filteredData = () =>{
+    let data = this.state.data
+
+    if(this.state.sortBy && this.state.sortDirection === "up"){
+      data = data.sort(this.compareFunc)
+    } else if (this.state.sortBy && this.state.sortDirection=== "down"){
+      data = data.sort(this.reverseCompareFunc)
+    }
+    
+    if(this.state.billableOnly){
+      data = data.filter(data => {
+        return data.billable === "Yes"
+      })
+    }
+    
+    return data.filter(data => {
+      return data.client.toLowerCase().includes(this.state.searchTerm)
+    })
+  }
+  
   updateSearchTerm = (newTerm) => {
     this.setState({
       searchTerm: newTerm.toLowerCase()
     })
   }
 
-  filteredData = () =>{
-    let data = this.state.data
-
-    if(this.state.billableOnly){
-      data = data.filter(data => {
-        return data.billable === "Yes"
-      })
-    }
-
-    return data.filter(data => {
-      return data.client.toLowerCase().includes(this.state.searchTerm)
-    })
-    
-  }
-
   toggleBillableOnly =  () => {
     this.state.billableOnly ? this.setState({billableOnly: false}) : this.setState({billableOnly: true})
   }
 
-  renderNewEntry = (newEntry) => {
-    this.setState({data: [...this.state.data, newEntry]})
+  headerSort = (event) => {
+    event.persist()
+    if(this.state.sortBy === event._targetInst.key) {
+        this.setState({sortBy: event._targetInst.key, sortDirection: "down"})
+    } else {
+      
+        this.setState({sortBy: event._targetInst.key, sortDirection: "up"})
+    }
   }
 
+  compareFunc = (a, b) => {
+    if(a[this.camelize(this.state.sortBy)] < b[this.camelize(this.state.sortBy)]){
+      return -1
+    }
+    if(a[this.camelize(this.state.sortBy)] > b[this.camelize(this.state.sortBy)]){
+      return 1;
+    }
+    return 0
+  }
+
+  reverseCompareFunc = (a, b) => {
+    if(a[this.camelize(this.state.sortBy)] < b[this.camelize(this.state.sortBy)]){
+      return 1
+    }
+    if(a[this.camelize(this.state.sortBy)] > b[this.camelize(this.state.sortBy)]){
+      return -1
+    }
+
+    return 0
+  }
+
+  camelize = (str) => {
+    return str.split(' ').map(function(word,index){
+
+      if(index === 0){
+        return word.toLowerCase();
+      }
+
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+      
+    }).join('');
+
+  }
+
+
   render () {
-    console.log(this.state.billableOnly)
+    debugger
     if(this.state.data){
       return (
         <div>
@@ -59,7 +111,7 @@ class App extends React.Component {
           <Summary data={this.filteredData()}/>
           <NewEntry renderNewEntry={this.renderNewEntry}/>
           <SearchClient updateSearchTerm={this.updateSearchTerm} toggleBillableOnly={this.toggleBillableOnly}/>
-          <WorkList data={this.filteredData()}/>
+          <WorkList data={this.filteredData()} headerSort={this.headerSort}/>
         </div>
       )
     } else {

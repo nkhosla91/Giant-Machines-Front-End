@@ -8,7 +8,7 @@ class WorkList extends React.Component {
   renderTableHeader() {
     let headers = ["Date", "Client", "Project", "Project Code", "Hours", "Hours rounded", "Billable", "First Name", "Last Name", "Billable Rate"]
     return headers.map(header =>{
-       return <th key={header} onClick={this.onClickHandler}>{header}</th>
+       return <th key={header} value={header} onClick={this.props.headerSort}>{header}</th>
     })
   }
 
