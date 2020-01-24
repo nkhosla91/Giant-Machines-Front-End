@@ -31,6 +31,11 @@ class App extends React.Component {
   filteredData = () => {
     let data = this.state.data
 
+    data.forEach(datum => {
+      datum['billableAmount'] = datum["billableRate"] * datum["hours"]
+    })
+
+
     if(this.state.sortBy && this.state.sortDirection === "up"){
       data = data.sort(this.compareFunc)
     } else if (this.state.sortBy && this.state.sortDirection=== "down"){
@@ -60,6 +65,10 @@ class App extends React.Component {
 
   headerSort = (event) => {
     event.persist()
+    if(event._targetInst.key === "Name"){
+      event._targetInst.key = "Client"
+    }
+
     if(this.state.sortBy === event._targetInst.key) {
         this.setState({sortBy: event._targetInst.key, sortDirection: "down"})
     } else {
@@ -91,13 +100,10 @@ class App extends React.Component {
 
   camelize = (str) => {
     return str.split(' ').map(function(word,index){
-
       if(index === 0){
         return word.toLowerCase();
       }
-
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-
     }).join('');
 
   }
