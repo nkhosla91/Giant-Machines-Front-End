@@ -1,4 +1,4 @@
-## Giant Machines Work-Order Front End
+## Giant Machines Work Orders Front End
 
 This application’s interface is built with React.js to organize and sort work orders
 
