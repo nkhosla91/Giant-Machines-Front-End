@@ -4,6 +4,10 @@ This application’s interface is built with React.js to organize and sort work 
 
 ## Installation
 
+Clone https://github.com/nkhosla91/Giant-Machines-Front-End.git
+
+Once cloned and the file is open run…
+
 Once cloned run…
 
 ```
