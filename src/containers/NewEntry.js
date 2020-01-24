@@ -66,7 +66,7 @@ class NewEntry extends React.Component {
         delete newEntry['year']
         newEntry['date'] = date
         newEntry['hoursRounded'] = parseInt(newEntry['hours'])
-        // console.log(newEntry)
+    
 
         return fetch("http://localhost:8000/api/v1/works", {
             method: 'POST',

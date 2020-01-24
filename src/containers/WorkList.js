@@ -14,7 +14,6 @@ class WorkList extends React.Component {
 
   renderList = () => {
     return this.props.data.map(datum => {
-      console.log(datum.id)
       return <WorkListItem 
         key={datum.id}
         id={datum.id}
