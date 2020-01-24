@@ -6,7 +6,7 @@ class WorkList extends React.Component {
 
 
   renderTableHeader() {
-    let headers = ["Name", "Project", "Hours", "Billable", "Billable Amount"]
+    let headers = ["Name", "Client", "Hours", "Billable", "Billable Amount"]
     return headers.map(header =>{
        return <th key={header} value={header} onClick={this.props.headerSort}>{header}</th>
     })
@@ -16,8 +16,8 @@ class WorkList extends React.Component {
     return this.props.data.map(datum => {
       return <WorkListItem 
         key={datum.id}
-        client={datum.client}
         project={datum.project}
+        client={datum.client}
         hours={datum.hours}
         billable={datum.billable}
         billableRate={datum.billableRate}

@@ -66,13 +66,12 @@ class App extends React.Component {
   headerSort = (event) => {
     event.persist()
     if(event._targetInst.key === "Name"){
-      event._targetInst.key = "Client"
+      event._targetInst.key = "Project"
     }
 
     if(this.state.sortBy === event._targetInst.key) {
         this.setState({sortBy: event._targetInst.key, sortDirection: "down"})
     } else {
-      
         this.setState({sortBy: event._targetInst.key, sortDirection: "up"})
     }
   }
