@@ -78,12 +78,11 @@ class NewEntry extends React.Component {
           })
           .then(response => response.json())
           .then(response => newEntry["id"] = response.id)
-        //   .then(response => console.log(newEntry, "created entry"))
+          .then(response => console.log(newEntry, "created entry"))
           .then(this.props.renderNewEntry(newEntry))  
     }
 
     render () {
-        console.log(this.state)
         if (!this.state.clicked){
             return (
                 <button className="Form-button" onClick={this.toggleButton}>Create New Entry</button>
