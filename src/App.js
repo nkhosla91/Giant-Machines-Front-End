@@ -22,8 +22,9 @@ class App extends React.Component {
       .then(data => this.setState({data}))
   }
 
-  renderNewEntry = (newEntry) => {
-    this.setState({data: [...this.state.data, newEntry]})
+  renderNewEntry = (response) => {
+    debugger
+    this.setState({data: [...this.state.data, response]})
   }
 
   
@@ -96,14 +97,13 @@ class App extends React.Component {
       }
 
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-      
+
     }).join('');
 
   }
 
 
   render () {
-    debugger
     if(this.state.data){
       return (
         <div>

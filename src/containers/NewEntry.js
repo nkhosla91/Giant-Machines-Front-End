@@ -77,9 +77,7 @@ class NewEntry extends React.Component {
             body: JSON.stringify(newEntry)
           })
           .then(response => response.json())
-          .then(response => newEntry["id"] = response.id)
-          .then(response => console.log(newEntry, "created entry"))
-          .then(this.props.renderNewEntry(newEntry))  
+          .then(response => this.props.renderNewEntry(response))  
     }
 
     render () {
