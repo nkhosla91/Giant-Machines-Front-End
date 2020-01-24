@@ -3,6 +3,7 @@ import './App.css';
 import WorkList from './containers/WorkList'
 import SearchClient from './containers/SearchClient'
 import Summary from './containers/Summary'
+import NewEntry from './containers/NewEntry'
 
 
 class App extends React.Component {
@@ -38,8 +39,8 @@ class App extends React.Component {
       return (
         <div>
           <h1 className="Header">Giant Machines Work Orders</h1>
-          <NewEntry />
           <Summary data={this.filteredData()}/>
+          <NewEntry />
           <SearchClient updateSearchTerm={this.updateSearchTerm}/>
           <WorkList data={this.filteredData()}/>
         </div>

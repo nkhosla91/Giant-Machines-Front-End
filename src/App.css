@@ -11,13 +11,54 @@
     margin-right: 30%;
 }
 
+.Form {
+    font-family: "Arial";
+    display: flex;
+    flex-direction: wrap;
+    justify-content: flex-start;
+    border-top: 3px solid #ddd;
+    border-bottom: 3px solid #ddd;
+}
+
+.Form-key {
+    font-family: "Arial";
+    text-indent: 10px;
+    margin: 10px;
+}
+.Form-value {
+    font-family: "Arial";
+    margin: 10px;
+    border: 1px solid #ddd;
+}
+
+
+.New-entry {
+    border: 3px solid rgb(83, 98, 194);
+    background-color: lightblue;
+    font-family: "Arial";
+    font-weight: bold;
+    margin-bottom: 8px;
+    margin-left: 10px;
+    margin-top: 9px;
+
+}
+
+
+.Search-bar {
+    font-family: "Arial";
+    text-indent: 10px;
+    border-radius: 6px;
+    width: 20%;
+}
+
 .Summary {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     border-top: 3px solid #ddd;
-    margin-bottom: 8px;
-    height: 70px;
+    border-bottom: 3px solid #ddd;
+    /* margin-bottom: 10px; */
+    height: 80px;
 }
 
 .Summary-key {
@@ -42,16 +83,10 @@
     padding-bottom: 5px;
 }
 
-.Search-bar {
-    font-family: "Arial";
-    text-indent: 10px;
-    border-radius: 6px;
-    width: 20%;
-  }
 
-  #work-table {
-      width: 100%
-  }
+#work-table {
+    width: 100%
+}
 
 #work-table td, #work-table th {
     text-align: center;
