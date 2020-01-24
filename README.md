@@ -8,8 +8,6 @@ Clone https://github.com/nkhosla91/Giant-Machines-Front-End.git
 
 Once cloned and the file is open run…
 
-Once cloned run…
-
 ```
 npm install
 npm start
