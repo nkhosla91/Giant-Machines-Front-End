@@ -28,7 +28,7 @@ class App extends React.Component {
   }
 
   
-  filteredData = () =>{
+  filteredData = () => {
     let data = this.state.data
 
     if(this.state.sortBy && this.state.sortDirection === "up"){
