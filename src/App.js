@@ -23,7 +23,6 @@ class App extends React.Component {
   }
 
   renderNewEntry = (response) => {
-    debugger
     this.setState({data: [...this.state.data, response]})
   }
 

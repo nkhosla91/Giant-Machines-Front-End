@@ -77,7 +77,8 @@ class NewEntry extends React.Component {
             body: JSON.stringify(newEntry)
           })
           .then(response => response.json())
-          .then(response => this.props.renderNewEntry(response))  
+          .then(response => this.props.renderNewEntry(response))
+          .then(this.toggleButton())
     }
 
     render () {
